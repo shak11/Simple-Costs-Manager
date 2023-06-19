@@ -1,0 +1,105 @@
+<!--
+// Nir Chen - 303341721
+// Shmuel Maor - 206828360
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Costs Manager</title>
+    <script src=asyncLocalstorageLibrary.js></script>
+
+    <style>
+        h1 {
+            color: #0032ff;
+            background-color: rgba(222, 193, 156, 0.64);
+        }
+
+        body {
+            color: #0019d0;
+            background-image: url("src/template-g4c4761793_1920.jpg");
+        }
+
+        input {
+            color: rgba(17, 14, 10, 0.52);
+            background-color: rgba(203, 156, 30, 0.63);
+        }
+
+        button {
+            color: #000000;
+            background-color: rgb(0, 187, 255);
+        }
+    </style>
+</head>
+<body>
+<h1>Costs Manager</h1>
+<h2>add new cost</h2>
+
+<label>Description:</label><br>
+<input type='text' id='descriptionText' placeholder='description'><br>
+
+<label>Category:</label><br>
+<input type='text' list='categories' id='categoriesText' placeholder='category'><br>
+<datalist id='categories'>
+    <option value='Food'></option>
+    <option value='Health'></option>
+    <option value='Housing'></option>
+    <option value='Sport'></option>
+    <option value='Education'></option>
+    <option value='Transportation'></option>
+    <option value='Other'></option>
+</datalist>
+
+<label>Date:</label><br>
+<input type='date' id='dateText' placeholder='date'><br>
+
+<label>Price:</label><br>
+<input type='text' id='priceText' placeholder='price'><br>
+
+<button type='button' id='applyButton' onclick='createNewCost()'>confirm</button>
+<br>
+<br><br>
+<h2>search by month and year</h2>
+<input type="month" id="searchDateText" min="1900-01" value="2023-01"/>
+<button type='button' id='searchButton' onclick='getReport()'>search</button>
+<br>
+<br>
+<div id=tablediv></div>
+<script>
+    function createNewCost() {
+        //get variables
+        const description = document.getElementById('descriptionText').value;
+        const sum = document.getElementById('priceText').value;
+        const category = document.getElementById('categoriesText').value;
+
+        let date = document.getElementById('dateText').value;
+
+        const current_Date = new Date().toJSON().slice(0, 10);
+
+        //make sure variables are valid
+        if (!assertInput(description, sum, category)) {
+            alert("invalid input!");
+            return;
+        }
+
+        if ((date > current_Date) || date == "") {
+            alert('invalid date, setting date to today');
+            date = current_Date;
+        }
+
+        //add the cost
+        createCost(description, sum, category, date);
+    }
+
+    function assertInput(description, sum, category) {
+        if (description == '' || sum == '' || category == '') {
+            return false;
+        }
+        if (isNaN(sum) || sum < 0) {
+            return false;
+        }
+        return true;
+    }
+</script>
+</body>
+</html>
