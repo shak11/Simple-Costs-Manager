@@ -59,8 +59,8 @@ spec:
     spec:
       hostNetwork: true
       containers:
-        - name: simple-cost-manager
-          image: shak11/simple_cost_manager:1
+        - name: nginx
+          image: nginx
           ports:
             - containerPort: 80
       affinity:
