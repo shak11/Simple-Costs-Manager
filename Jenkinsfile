@@ -30,18 +30,16 @@ pipeline{
             steps{
                 script{
                     try{
-                         withCredentials([string(credentialsId: 'USR', variable: 'USER')]) {
                             bat 'docker login'
-                            bat 'docker push ${USER}/Simple_Costs_Manager'
-                         }
+                            bat 'docker push simple_costs_manager'
+                         
                         
                     }
                     catch(e)
                     {
-                     withCredentials([string(credentialsId: 'USR', variable: 'USER')]) {
                             sh 'docker login'
-                            sh 'docker push ${USER}/Simple_Costs_Manager'
-                        }
+                            sh 'docker push simple_costs_manager'
+                        
                     }
                 }
             }
