@@ -19,7 +19,7 @@ spec:
         image: shak11/simple_costs_manager
         ports:
         - containerPort: 80
-
+        imagePullPolicy: Never
 
 ---
 
@@ -36,5 +36,3 @@ spec:
     port: 80
     targetPort: 80
   type: NodePort
-
-
