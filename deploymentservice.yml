@@ -41,7 +41,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginx-deployment
+  name: simple-cost-manager
   labels:
     app: web
 spec:
@@ -59,7 +59,7 @@ spec:
     spec:
       hostNetwork: true
       containers:
-        - name: simple_cost_manager
+        - name: simple-cost-manager
           image: shak11/simple_cost_manager:1
           ports:
             - containerPort: 80
