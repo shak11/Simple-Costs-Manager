@@ -31,14 +31,14 @@ pipeline{
                 script{
                     try{
                             bat 'docker login'
-                            bat 'docker push simple_costs_manager:1'
+                            bat 'docker push shak11/simple_costs_manager:1'
                          
                         
                     }
                     catch(e)
                     {
                             sh 'docker login'
-                            sh 'docker push simple_costs_manager:1'
+                            sh 'docker push shak11/simple_costs_manager:1'
                         
                     }
                 }
