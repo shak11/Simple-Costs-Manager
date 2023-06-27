@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: simple-costs-manager
-        image: shak11/simple_costs_manager:1
+        image: simple_costs_manager:1
         ports:
         - containerPort: 80
         imagePullPolicy: Never
