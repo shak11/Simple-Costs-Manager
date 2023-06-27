@@ -14,7 +14,7 @@ pipeline{
             steps{
                 script{
                     try{
-                        bat 'docker build -t simple_costs_manager:0.1'
+                        bat 'docker build -t "simple_costs_manager:0.1"'
                     }
                     catch(e)
                     {
