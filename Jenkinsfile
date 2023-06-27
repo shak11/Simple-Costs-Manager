@@ -58,7 +58,7 @@ pipeline{
         {
             steps{
                 script{
-                    kubernetesDeploy configs: 'deploymentservice.yaml', kubeConfig: [path: ''], kubeconfigId: 'K8Config', secretName: '', ssh: [sshCredentialsId: '*', sshServer: ''], textCredentials: [certificateAuthorityData: '', clientCertificateData: '', clientKeyData: '', serverUrl: 'https://']
+                    kubernetesDeploy( configs: 'deploymentservice.yml', kubeConfig: [path: ''], kubeconfigId: 'K8Config')
                 }
             }
         }
