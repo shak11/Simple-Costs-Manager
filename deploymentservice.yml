@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: simple-costs-manager
+  labels:
+    app: simple-costs-manager
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: simple-costs-manager
+  template:
+    metadata:
+      labels:
+        app: simple-costs-manager
+    spec:
+      containers:
+      - name: simple-costs-manager
+        image: 'shak11/simple_costs_manager:1'
+        ports:
+        - containerPort: 80
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: simple-costs-manager-service
+spec:
+  selector:
+    app: simple-costs-manager
+  type: LoadBalancer
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
+#  type: NodePort
