@@ -37,7 +37,7 @@ pipeline{
                     withCredentials([string(credentialsId: 'PWD', variable: 'Password'), string(credentialsId: 'USR', variable: 'USER')]) {
                     def path = "${USER}/simple_costs_manager:1"
                     try{
-                            bat "docker login"
+                            bat "docker login -u ${USER} -p ${Password}"
                             bat "docker push ${path}"
                          
                         
