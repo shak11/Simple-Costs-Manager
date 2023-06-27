@@ -19,7 +19,6 @@ spec:
         image: simple_costs_manager:1
         ports:
         - containerPort: 80
-        imagePullPolicy: Never
 
 ---
 
