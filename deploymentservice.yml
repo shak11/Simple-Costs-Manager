@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: nginx-app-server
-        image: nginx
+        image: shak11/simple_costs_manager
         ports:
         - containerPort: 80
 
