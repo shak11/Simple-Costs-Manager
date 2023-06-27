@@ -5,19 +5,19 @@ kind: Deployment
 metadata:
   name: nginx-deployment
   labels:
-    app: nginx_app
+    app: nginx-app
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: nginx_app
+      app: nginx-app
   template:
     metadata:
       labels:
-        app: nginx_app
+        app: nginx-app
     spec:
       containers:
-      - name: nginx_app_server
+      - name: nginx-app-server
         image: shak11/simple_cost_manager:1
         ports:
         - containerPort: 80
@@ -31,7 +31,7 @@ metadata:
   name: nginx-service
 spec:
   selector:
-    app: nginx_app
+    app: nginx-app
   type: LoadBalancer
   ports:
   - protocol: TCP
