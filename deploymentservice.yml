@@ -18,7 +18,7 @@ spec:
       - name: nginx-app-server
         image: shak11/simple_cost_manager:1
         ports:
-        - containerPort: 8888
+        - containerPort: 80
         
         
 ---
@@ -35,4 +35,4 @@ spec:
   - protocol: TCP
     port: 8889
     targetPort: 80
-    nodePort: 8890
+#  type: NodePort
