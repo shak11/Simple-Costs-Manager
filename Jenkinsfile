@@ -14,12 +14,12 @@ pipeline{
             steps{
                 script{
                     try{
-                        bat 'docker build -t docker_test:1 .'
+                        bat 'docker build -t simple_costs_manager:1 .'
                     }
                     catch(e)
                     {
                         // For Linux machines
-                        sh 'docker build -t docker_test:1 .'
+                        sh 'docker build -t simple_costs_manager:1 .'
                         // sh 'docker run -p 8888:80 docker_test:1'
                     }
                 }
