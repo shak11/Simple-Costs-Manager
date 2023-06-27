@@ -30,15 +30,15 @@ pipeline{
                 script{
                     try{
                         withCredentials([string(credentialsId: 'PWD', variable: 'PWD'), string(credentialsId: 'USR', variable: 'USR')]) {
-                            bat 'docker login -u ${USR} -p ${PWD}'
-                            bat 'docker push ${USR}/Simple_Costs_Manager'
+                            bat "docker login -u ${USR} -p ${PWD}"
+                            bat "docker push ${USR}/Simple_Costs_Manager"
                         }
                     }
                     catch(e)
                     {
                      withCredentials([string(credentialsId: 'PWD', variable: 'PWD'), string(credentialsId: 'USR', variable: 'USR')]) {
-                            sh 'docker login -u ${USR} -p ${PWD}'
-                            sh 'docker push ${USR}/Simple_Costs_Manager'
+                            sh "docker login -u ${USR} -p ${PWD}"
+                            sh "docker push ${USR}/Simple_Costs_Manager"
                         }
                     }
                 }
