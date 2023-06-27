@@ -33,6 +33,6 @@ spec:
   type: LoadBalancer
   ports:
   - protocol: TCP
-    port: 8889
-    targetPort: 80
+    port: 80
+    targetPort: 8888
 #  type: NodePort
