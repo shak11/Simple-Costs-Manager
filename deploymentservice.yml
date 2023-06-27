@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginx-deployment
+  name: simple-costs-manager
   labels:
-    app: nginx-app
+    app: simple-costs-manager
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: nginx-app
+      app: simple-costs-manager
   template:
     metadata:
       labels:
-        app: nginx-app
+        app: simple-costs-manager
     spec:
       containers:
-      - name: nginx-app-server
+      - name: simple-costs-manager
         image: shak11/simple_costs_manager:1
         ports:
         - containerPort: 80
@@ -26,10 +26,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: nginx-service
+  name: simple-costs-manager-service
 spec:
   selector:
-    app: nginx-app
+    app: simple-costs-manager
   type: LoadBalancer
   ports:
   - protocol: TCP
