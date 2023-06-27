@@ -24,6 +24,7 @@ pipeline{
                     }
                 }
             }
+        }
             stage("Upload Build To DockerHub")
         {
             steps{
