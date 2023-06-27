@@ -54,5 +54,13 @@ pipeline{
                 }
             }
         }
+        stage("K8 Deployment")
+        {
+            steps{
+                script{
+                    kubernetesDeploy configs: 'deploymentservice.yaml', kubeConfig: [path: ''], kubeconfigId: 'K8Config', secretName: '', ssh: [sshCredentialsId: '*', sshServer: ''], textCredentials: [certificateAuthorityData: '', clientCertificateData: '', clientKeyData: '', serverUrl: 'https://']
+                }
+            }
+        }
     }
 }
