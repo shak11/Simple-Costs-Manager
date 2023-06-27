@@ -1,77 +1,40 @@
-#apiVersion: apps/v1
-#kind: Deployment
-#metadata:
-#  name: nginx-deployment
-#  labels:
-#    app: nginx-app
-#spec:
-#  replicas: 1
-#  selector:
-#    matchLabels:
-#      app: nginx-app
-#  template:
-#    metadata:
-#      labels:
-#        app: nginx-app
-#    spec:
-#      containers:
-#      - name: nginx-app-server
-#        image: shak11/simple_cost_manager:1
-#        ports:
-#        - containerPort: 80
-#
-#
-#---
-#
-#apiVersion: v1
-#kind: Service
-#metadata:
-#  name: nginx-service
-#spec:
-#  selector:
-#    app: nginx-app
-#  type: LoadBalancer
-#  ports:
-#  - protocol: TCP
-#    port: 80
-#    targetPort: 80
-#  type: NodePort
-
-
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: simple-cost-manager
+  name: nginx-deployment
   labels:
-    app: web
+    app: nginx-app
 spec:
+  replicas: 1
   selector:
     matchLabels:
-      octopusexport: OctopusExport
-  replicas: 1
-  strategy:
-    type: Recreate
+      app: nginx-app
   template:
     metadata:
       labels:
-        app: web
-        octopusexport: OctopusExport
+        app: nginx-app
     spec:
-      hostNetwork: true
       containers:
-        - name: nginx
-          image: nginx
-          ports:
-            - containerPort: 80
-      affinity:
-        podAntiAffinity:
-          preferredDuringSchedulingIgnoredDuringExecution:
-            - weight: 100
-              podAffinityTerm:
-                labelSelector:
-                  matchExpressions:
-                    - key: app
-                      operator: In
-                      values:
-                        - web
-                topologyKey: kubernetes.io/hostname
+      - name: nginx-app-server
+        image: nginx
+        ports:
+        - containerPort: 80
+
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-service
+spec:
+  selector:
+    app: nginx-app
+#  type: LoadBalancer
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
+  type: NodePort
+
+
