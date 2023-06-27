@@ -14,7 +14,7 @@ pipeline{
             steps{
                 script{
                     try{
-                        withCredentials(string(credentialsId: 'USR', variable: 'USER')) {
+                        withCredentials([string(credentialsId: 'USR', variable: 'USER')]) {
                         def path = $USER + "/simple_costs_manager:1 ."
                         bat 'docker build -t ${path}'
                     }
