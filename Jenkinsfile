@@ -13,34 +13,44 @@ pipeline{
         {
             steps{
                 script{
+                        withCredentials([string(credentialsId: 'USR', variable: 'USER')]) {
+                            def path = "${USER}/simple_costs_manager:1 ."
                     try{
-                        bat 'docker build -t docker_test:1 .'
+                        
+                        bat "docker build -t ${path}"
                     }
+                    
                     catch(e)
                     {
                         // For Linux machines
-                        sh 'docker build -t docker_test:1 .'
+                        sh "docker build -t ${path}"
                         // sh 'docker run -p 8888:80 docker_test:1'
                     }
                 }
+                }
             }
+        }
             stage("Upload Build To DockerHub")
         {
             steps{
                 script{
+                    withCredentials([string(credentialsId: 'PWD', variable: 'Password'), string(credentialsId: 'USR', variable: 'USER')]) {
+                    def path = "${USER}/simple_costs_manager:1"
                     try{
-                        withCredentials([string(credentialsId: 'PWD', variable: 'PWD'), string(credentialsId: 'USR', variable: 'USR')]) {
-                            bat 'docker login -u ${USR} -p ${PWD}'
-                            bat 'docker push ${USR}/Simple_Costs_Manager'
-                        }
+                        
+                            
+                            bat "docker login -u ${USER} -p ${Password}"
+                            bat "docker push ${path}"
+                         
+                        
                     }
                     catch(e)
                     {
-                     withCredentials([string(credentialsId: 'PWD', variable: 'PWD'), string(credentialsId: 'USR', variable: 'USR')]) {
-                            sh 'docker login -u ${USR} -p ${PWD}'
-                            sh 'docker push ${USR}/Simple_Costs_Manager'
-                        }
+                            sh "docker login -u ${USER} -p ${Password}"
+                            sh "docker push ${path}"
+                        
                     }
+                }
                 }
             }
         }
