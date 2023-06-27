@@ -13,18 +13,20 @@ pipeline{
         {
             steps{
                 script{
-                    try{
                         withCredentials([string(credentialsId: 'USR', variable: 'USER')]) {
-                        def path = "${USER}/simple_costs_manager:1 ."
+                            def path = "${USER}/simple_costs_manager:1 ."
+                    try{
+                        
                         bat "docker build -t ${path}"
                     }
-                    }
+                    
                     catch(e)
                     {
                         // For Linux machines
-                        sh 'docker build -t shak11/simple_costs_manager:1 .'
+                        sh "docker build -t ${path}"
                         // sh 'docker run -p 8888:80 docker_test:1'
                     }
+                }
                 }
             }
         }
@@ -32,20 +34,23 @@ pipeline{
         {
             steps{
                 script{
+                    withCredentials([string(credentialsId: 'PWD', variable: 'Password'), string(credentialsId: 'USR', variable: 'USER')]) {
+                    def path = "${USER}/simple_costs_manager:1"
                     try{
-                        withCredentials([string(credentialsId: 'PWD', variable: 'Password'), string(credentialsId: 'USR', variable: 'USER')]) {
-                            def path = "${USER}/simple_costs_manager:1"
+                        
+                            
                             bat "docker login -u ${USER} -p ${Password}"
                             bat "docker push ${path}"
                          
-                        }
+                        
                     }
                     catch(e)
                     {
-                            sh 'docker login'
-                            sh 'docker push shak11/simple_costs_manager:1'
+                            sh "docker login -u ${USER} -p ${Password}"
+                            sh "docker push ${path}"
                         
                     }
+                }
                 }
             }
         }
