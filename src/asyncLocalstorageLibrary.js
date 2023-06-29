@@ -1,6 +1,3 @@
-// Nir Chen - 303341721
-// Shmuel Maor - 206828360
-
 async function getNewIndex() {
     let i = 0;
     if (localStorage.getItem('costID')) {
