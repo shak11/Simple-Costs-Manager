@@ -14,16 +14,16 @@ pipeline{
             steps{
                 script{
                         withCredentials([string(credentialsId: 'USR', variable: 'USER')]) {
-                            def path = "${USER}/simple_costs_manager:1 ."
+                            def path = "${USER}/simple_costs_manager:1"
                     try{
                         
-                        bat "docker build -t ${path}"
+                        bat "docker build -t ${path} ."
                     }
                     
                     catch(e)
                     {
                         // For Linux machines
-                        sh "docker build -t ${path}"
+                        sh "docker build -t ${path} ."
                         // sh 'docker run -p 8888:80 docker_test:1'
                     }
                 }
